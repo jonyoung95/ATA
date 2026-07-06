@@ -1,10 +1,12 @@
+import TranslationPanel from './components/TranslationPanel'
+import WorkspaceHeader from './components/WorkspaceHeader'
 import './App.css'
 
 function App() {
   return (
     <main>
-      <h1>ATA Workspace</h1>
-      <p>Knowledge-driven translation workspace</p>
+      <WorkspaceHeader />
+      <TranslationPanel />
     </main>
   )
 }
