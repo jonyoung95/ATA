@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { TranslationMode } from './ModeSelector'
+import CopyButton from './CopyButton'
 
 type TranslationPanelProps = {
   selectedMode: TranslationMode | null
@@ -56,15 +57,19 @@ function TranslationPanel({ selectedMode }: TranslationPanelProps) {
         </div>
 
         <div className="editor-area">
-          <label htmlFor="recommendation-text">AI Recommendation Result</label>
-          <textarea
-            id="recommendation-text"
-            value={recommendationText}
-            onChange={(event) => setRecommendationText(event.target.value)}
-            placeholder="Recommendation will be generated automatically based on source text and mode."
-            disabled={!isModeSelected}
-          />
-        </div>
+  <div className="editor-header">
+    <label htmlFor="recommendation-text">AI Recommendation Result</label>
+    <CopyButton text={recommendationText} />
+  </div>
+
+  <textarea
+    id="recommendation-text"
+    value={recommendationText}
+    onChange={(event) => setRecommendationText(event.target.value)}
+    placeholder="Recommendation will be generated automatically based on source text and mode."
+    disabled={!isModeSelected}
+  />
+</div>
       </div>
     </section>
   )
