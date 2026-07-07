@@ -1,0 +1,144 @@
+# F001 - Translation Workspace
+
+## 1. Document Information
+
+  Item      Value
+  --------- -----------------------
+  ID        F001
+  Name      Translation Workspace
+  Version   V1.0
+  Status    Approved
+  Owner     ATA Project
+
+## 2. Overview
+
+The Translation Workspace is the primary working area of ATA. All
+translation activities begin and end here.
+
+## 3. Goal
+
+-   Minimize user actions
+-   Keep source and recommendation visible simultaneously
+-   Build reusable translation knowledge
+-   Support professional localization workflows
+
+## 4. Scope
+
+### Included (V1)
+
+-   Mode Selection
+-   Source Text Editor
+-   AI Recommendation Panel
+-   Editable Recommendation
+-   OCR Entry
+-   Sentence Cards
+-   Assets Recommendation
+-   Workspace History
+-   Copy Result
+
+### Out of Scope (V1)
+
+-   AI Chat
+-   Compare View
+-   Multi Workspace
+-   Drag & Drop Files
+-   Team Collaboration
+
+### Future (V2)
+
+-   Split View
+-   Multiple Recommendations
+-   Recommendation Comparison
+-   Workspace Snapshot
+
+## 5. UI Layout
+
+``` text
+Header
+Mode Selection
+Source Text | AI Recommendation
+Sentence Cards (Conditional)
+Assets Recommendation (Conditional)
+Workspace History (Conditional)
+```
+
+## 6. Components
+
+-   Mode Selection: Required
+-   Source Text Editor: Textarea, max 5000 chars
+-   AI Recommendation: Editable
+-   Sentence Cards: Conditional
+-   Assets Recommendation: Conditional
+-   Workspace History: Conditional
+
+## 7. Component Behavior
+
+-   Mode is mandatory.
+-   Source input enables generation.
+-   Recommendation remains editable.
+
+## 8. User Flow
+
+Open → Select Mode → Input Source/OCR → Review OCR → Generate → Edit →
+Assets → Copy → Complete
+
+## 9. State Management
+
+Idle → Mode Selected → Typing → Ready → Generating → Editing → Completed
+
+## 10. Validation Rules
+
+-   Mode required
+-   Source required
+-   Recommendation required before review
+
+## 11. Error Handling
+
+Handle OCR failure, generation failure, network errors and preserve user
+input.
+
+## 12. Empty State
+
+Source: Enter source text... Recommendation: AI recommendation will
+appear here.
+
+## 13. Loading State
+
+Show loading indicator and disable generation while generating.
+
+## 14. Business Rules
+
+-   AI never overwrites user edits.
+-   Assets and History are automatic.
+
+## 15. UX Rules
+
+Workflow over buttons. Minimize clicks.
+
+## 16. Related Features
+
+F003, F004, F005, F006, F007, F009, F011
+
+## 17. Acceptance Criteria
+
+-   Given no mode, generation is disabled.
+-   Given mode + source, generation is available.
+-   Edited recommendation stays in workspace.
+
+## 18. Developer Notes
+
+-   No AI Recommendation button.
+-   No Save to Knowledge button.
+-   No standalone Review page.
+-   Assets and History are automatic.
+
+## 19. QA Checklist
+
+Mode, Source, OCR, Recommendation, Assets, History, Copy, Empty,
+Loading.
+
+## 20. Revision History
+
+  Version   Description
+  --------- --------------------------------
+  V1.0      Initial official specification
