@@ -1,0 +1,1939 @@
+# P001 - ATA Glossary
+
+> **Document Type:** Project Standard  
+> **Project:** ATA — Knowledge-driven Translation Workspace  
+> **Document ID:** P001  
+> **Version:** V1.0  
+> **Status:** Draft  
+> **Applies To:** All ATA product specifications, including F001–F011 and future F0XX documents  
+> **Governing Standard:** P000_Product_Specification_Standard.md
+
+---
+
+## 1. Purpose
+
+This document defines the official terminology used throughout ATA.
+
+Its purpose is to ensure that Product Owners, designers, developers, QA engineers, and AI implementation systems interpret ATA concepts consistently.
+
+This glossary is not a simple translation dictionary.
+
+It defines:
+
+- The official name of each ATA concept.
+- The exact meaning of each term.
+- The boundaries between similar concepts.
+- Terms that must not be treated as equivalent.
+- Core rules associated with each concept.
+- Related feature specifications.
+
+The primary objective is to prevent different people, development teams, or AI systems from assigning different meanings to the same ATA terminology.
+
+When an ATA specification uses a term defined in this document, the meaning in this document applies unless an approved feature specification explicitly defines a narrower feature-specific meaning.
+
+---
+
+## 2. Glossary Principles
+
+### GP-001 — One concept should have one canonical term
+
+The same ATA concept should not be referred to by multiple names without a defined reason.
+
+For example, the following terms must not be used interchangeably without explicit definition:
+
+```text
+Workspace
+Translation Workspace
+Workspace History
+Workspace Flow
+```
+
+Each represents a different concept.
+
+---
+
+### GP-002 — Similar terms must remain conceptually distinct
+
+The following concepts are related but not equivalent:
+
+```text
+AI Recommendation
+User-edited Translation
+Workspace Data
+Workspace History
+Asset
+Knowledge
+Reviewed Content
+```
+
+A specification must not treat them as interchangeable.
+
+---
+
+### GP-003 — Feature behavior belongs in feature specifications
+
+This glossary defines what a term means.
+
+Detailed feature behavior belongs in the relevant F0XX specification.
+
+For example:
+
+```text
+P001 defines what "Mode" means.
+
+F005 defines how Mode selection behaves.
+```
+
+P001 must not replace feature specifications.
+
+---
+
+### GP-004 — Undefined terms must not create hidden product behavior
+
+If a new product concept is required, it must be explicitly defined before it is used as the basis for major product behavior.
+
+AI systems and developers must not create new ATA concepts merely because they appear useful or familiar.
+
+---
+
+### GP-005 — Official English terms are preserved
+
+ATA uses official English product terms in specifications and implementation references where appropriate.
+
+Korean explanations in this document clarify meaning but do not automatically replace canonical English terminology.
+
+---
+
+## 3. Term Classification
+
+ATA terms are classified into the following categories.
+
+| Category | Purpose |
+|---|---|
+| Product Identity | Defines what ATA is |
+| Workspace | Defines the translation working environment and work unit |
+| Content | Defines source and translated content states |
+| AI and Recommendation | Defines AI-generated output and optimization concepts |
+| Knowledge | Defines reusable translation knowledge and related assets |
+| Workflow | Defines review and progression concepts |
+| History and Recovery | Defines saved work, deletion, and restoration |
+| Input | Defines OCR and other content input mechanisms |
+| User Context | Defines user-specific context and preferences |
+
+---
+
+# 4. Product Identity Terms
+
+## TERM-001 — ATA
+
+**Canonical Term:** ATA
+
+**Korean Meaning:** ATA 프로젝트 및 제품의 공식 명칭
+
+**Definition:**
+
+ATA is a Knowledge-driven Translation Workspace designed to support professional translation work through AI recommendations, reusable translation knowledge, structured workflows, history, review, and context-aware assistance.
+
+ATA is not defined as a generic AI translator.
+
+ATA is not defined as a general-purpose AI chat interface.
+
+Its product identity is based on the following principles:
+
+```text
+AI recommends.
+Users decide.
+Knowledge comes first.
+Workflow takes priority over isolated UI actions.
+```
+
+**Must Not Be Confused With:**
+
+- Generic AI translator
+- AI chatbot
+- Simple text-to-text translation tool
+- Translation API playground
+
+**Core Rules:**
+
+- ATA must preserve its identity as a Knowledge-driven Translation Workspace.
+- New features must be evaluated against ATA's product identity before implementation.
+- Features must not be added merely because they are common in AI products or translation tools.
+
+**Related Specifications:**
+
+- P000
+- All F0XX specifications
+
+---
+
+## TERM-002 — Knowledge-driven Translation Workspace
+
+**Canonical Term:** Knowledge-driven Translation Workspace
+
+**Korean Meaning:** 지식 기반 번역 워크스페이스
+
+**Definition:**
+
+The core product category and design philosophy of ATA.
+
+A Knowledge-driven Translation Workspace is a translation environment in which AI-generated recommendations are combined with reusable translation knowledge, prior work context, structured review, and user decision-making.
+
+The purpose is not only to generate a translation result.
+
+The purpose is also to support consistent translation decisions and accumulate reusable translation knowledge over time.
+
+**Must Not Be Confused With:**
+
+- One-time machine translation
+- Generic AI translation
+- AI chat
+- Simple translation editor
+
+**Core Rules:**
+
+- AI output alone does not define the product.
+- Reusable knowledge must remain a first-class concept.
+- The user retains final decision authority.
+- Translation work should exist within a defined workflow rather than as isolated input and output.
+
+**Related Specifications:**
+
+- P000
+- F001
+- F003
+- F004
+- F009
+- F011
+
+---
+
+# 5. Workspace Terms
+
+## TERM-003 — Workspace
+
+**Canonical Term:** Workspace
+
+**Korean Meaning:** 하나의 번역 작업 단위
+
+**Definition:**
+
+A Workspace is the logical unit that contains the context and state of a single translation task.
+
+Depending on the relevant feature specifications, a Workspace may contain:
+
+- Selected Mode
+- Source Content
+- AI Recommendation
+- User edits
+- Related Assets
+- Related History recommendations
+- Review state
+- Workspace Flow state
+- Other task-specific context
+
+A Workspace represents the translation task itself, not merely the visible screen.
+
+**Must Not Be Confused With:**
+
+- Translation Workspace
+- Workspace History
+- Workspace Flow
+- Application window
+
+**Key Distinction:**
+
+```text
+Workspace
+= the translation work unit and its state
+
+Translation Workspace
+= the primary UI environment where the user works on that unit
+```
+
+**Core Rules:**
+
+- A Workspace may contain temporary and persistent data according to the relevant specifications.
+- A Workspace is not automatically Knowledge.
+- A Workspace is not equivalent to a History record.
+- Workspace lifecycle behavior must be defined by the relevant feature specifications.
+
+**Related Specifications:**
+
+- F001
+- F004
+- F011
+
+---
+
+## TERM-004 — Translation Workspace
+
+**Canonical Term:** Translation Workspace
+
+**Korean Meaning:** 번역 작업을 수행하는 메인 작업 화면
+
+**Definition:**
+
+The primary working interface of ATA where users perform translation work.
+
+The Translation Workspace provides the visual environment for working with the current Workspace.
+
+Its primary areas may include:
+
+```text
+Mode
+Workspace context
+Source Content
+AI Recommendation
+```
+
+Conditional supporting content may include:
+
+```text
+Sentence Cards
+Assets Recommendations
+History Recommendations
+```
+
+The exact layout, states, interactions, and visibility rules are defined in F001.
+
+**Must Not Be Confused With:**
+
+- Workspace
+- Workspace History
+- Review screen
+- Generic translator screen
+
+**Core Rules:**
+
+- The Translation Workspace must remain focused on the translation workflow.
+- It must not become a generic AI chat interface.
+- Standalone `AI Recommendation`, `Save to Knowledge`, or `Send to Review` buttons must not be added unless explicitly approved by the applicable specification.
+- Supporting sections should appear only when their visibility conditions are satisfied.
+
+**Related Specifications:**
+
+- F001
+- F003
+- F004
+- F005
+- F006
+- F007
+- F011
+
+---
+
+## TERM-005 — Workspace Context
+
+**Canonical Term:** Workspace Context
+
+**Korean Meaning:** 현재 번역 작업을 이해하는 데 필요한 작업 맥락
+
+**Definition:**
+
+The set of information associated with the current Workspace that may affect translation recommendations, displayed knowledge, workflow behavior, or restoration of work.
+
+Workspace Context may include, where defined:
+
+- Selected Mode
+- Source language
+- Target language
+- User Profile information
+- Relevant Assets
+- Relevant History
+- Previous user decisions
+- Current workflow state
+
+The exact data included in Workspace Context must be defined by the applicable specifications.
+
+**Must Not Be Confused With:**
+
+- Source Content
+- Knowledge
+- User Profile
+- Workspace itself
+
+**Core Rules:**
+
+- Workspace Context must not include unspecified data merely because it may improve AI output.
+- Context usage must follow applicable product, privacy, and feature specifications.
+
+**Related Specifications:**
+
+- F001
+- F002
+- F003
+- F004
+- F005
+- F006
+- F011
+
+---
+
+# 6. Content Terms
+
+## TERM-006 — Source Content
+
+**Canonical Term:** Source Content
+
+**Korean Meaning:** 번역 대상 원문 콘텐츠
+
+**Definition:**
+
+The original content provided to ATA for translation work.
+
+Source Content may originate from:
+
+- Direct text input
+- Pasted text
+- OCR output
+- Other explicitly supported input methods
+
+Source Content is the input to the translation workflow.
+
+**Must Not Be Confused With:**
+
+- AI Recommendation
+- User-edited Translation
+- Asset
+- Knowledge
+
+**Core Rules:**
+
+- Source Content must be preserved according to Workspace persistence rules.
+- Recommendation-generation failure must not delete Source Content.
+- Source Content obtained through OCR remains Source Content after extraction.
+- Input methods do not change the conceptual identity of Source Content.
+
+**Related Specifications:**
+
+- F001
+- F006
+- F007
+
+---
+
+## TERM-007 — AI Recommendation
+
+**Canonical Term:** AI Recommendation
+
+**Short Form:** Recommendation
+
+**Korean Meaning:** AI 추천 결과
+
+**Definition:**
+
+Translation output generated by AI for user review and decision-making.
+
+An AI Recommendation is a proposal, not a final approved translation and not approved Knowledge.
+
+The user may review, accept, modify, reject, or otherwise interact with the Recommendation according to the applicable feature specifications.
+
+**Must Not Be Confused With:**
+
+- Final Translation
+- User-edited Translation
+- Asset
+- Knowledge
+- Reviewed Content
+
+**Key Distinction:**
+
+```text
+AI Recommendation
+≠ User approval
+
+AI Recommendation
+≠ Approved Knowledge
+```
+
+**Core Rules:**
+
+- AI recommends; the user decides.
+- AI Recommendation must not automatically become approved Knowledge.
+- AI Recommendation must not automatically be treated as user-approved content.
+- Generation behavior is defined by F006 and relevant Workspace specifications.
+- A standalone `AI Recommendation` generation button must not be assumed.
+
+**Related Specifications:**
+
+- F001
+- F005
+- F006
+- F011
+
+---
+
+## TERM-008 — User-edited Translation
+
+**Canonical Term:** User-edited Translation
+
+**Korean Meaning:** 사용자가 직접 수정한 번역 결과
+
+**Definition:**
+
+A translation result that has been modified by the user after AI generation or during translation work.
+
+A User-edited Translation reflects explicit user changes but does not automatically become approved Knowledge.
+
+**Must Not Be Confused With:**
+
+- AI Recommendation
+- Final Translation
+- Reviewed Content
+- Approved Knowledge
+
+**Core Rules:**
+
+- User edits must not be overwritten by automatic AI behavior unless explicitly defined and approved.
+- Recommendation-generation failure must not delete existing user edits.
+- User editing alone does not automatically create Knowledge.
+- Persistence behavior is defined by the applicable Workspace and History specifications.
+
+**Related Specifications:**
+
+- F001
+- F004
+- F006
+- F009
+- F011
+
+---
+
+## TERM-009 — Final Translation
+
+**Canonical Term:** Final Translation
+
+**Korean Meaning:** 현재 번역 작업에서 최종 결과로 결정된 번역
+
+**Definition:**
+
+The translation result considered complete for the current translation task according to the applicable Workspace Flow.
+
+Final Translation represents completion within the current task context.
+
+It does not automatically mean that the content has become approved reusable Knowledge.
+
+**Must Not Be Confused With:**
+
+- AI Recommendation
+- User-edited Translation
+- Reviewed Content
+- Approved Knowledge
+
+**Core Rules:**
+
+- The transition to Final Translation must follow the relevant Workspace Flow specification.
+- Final Translation does not automatically equal Knowledge.
+- The exact completion conditions must be defined by F011 or the applicable feature specification.
+
+**Related Specifications:**
+
+- F001
+- F009
+- F011
+
+---
+
+## TERM-010 — Sentence Card
+
+**Canonical Term:** Sentence Card
+
+**Korean Meaning:** 문장 단위의 번역 검토 카드
+
+**Definition:**
+
+A conditional UI representation used to display or work with sentence-level translation units when sentence-based processing is applicable.
+
+A Sentence Card may contain source and recommendation information according to the relevant specification.
+
+The exact structure and behavior must be defined in the applicable feature specification.
+
+**Must Not Be Confused With:**
+
+- Entire Workspace
+- Asset card
+- History record
+- Review item
+
+**Core Rules:**
+
+- Sentence Cards must not be displayed merely to fill empty UI space.
+- Their visibility must follow explicit conditions.
+- Sentence Cards must not introduce an independent translation workflow that conflicts with the primary Workspace Flow.
+
+**Related Specifications:**
+
+- F001
+- F006
+- F011
+
+---
+
+# 7. Mode and Recommendation Terms
+
+## TERM-011 — Mode
+
+**Canonical Term:** Mode
+
+**Korean Meaning:** 번역 목적과 작업 맥락을 지정하는 작업 유형
+
+**Definition:**
+
+A user-selected translation context that determines how ATA should interpret the purpose of the current translation task.
+
+The initial ATA Mode system includes:
+
+```text
+App
+Email
+Manual
+```
+
+Mode helps ATA generate recommendations appropriate to the intended translation context.
+
+**Must Not Be Confused With:**
+
+- Language selection
+- AI model selection
+- Workspace state
+- User Profile
+
+**Core Rules:**
+
+- Mode selection is mandatory before Recommendation generation.
+- Users explicitly select the appropriate Mode.
+- ATA does not automatically guess the translation purpose.
+- Mode-specific behavior must be defined by F005 and related specifications.
+
+**Related Specifications:**
+
+- F001
+- F005
+- F006
+
+---
+
+## TERM-012 — App Mode
+
+**Canonical Term:** App Mode
+
+**Korean Meaning:** 앱 UI 및 앱 내 텍스트 번역을 위한 모드
+
+**Definition:**
+
+A Mode intended for translation of application interface text and related in-app content.
+
+App Mode may consider context such as:
+
+- UI brevity
+- Natural Korean interface terminology
+- Button and label conventions
+- Existing product terminology
+- Consistency with approved Assets
+
+Detailed optimization behavior belongs to F005 and F006.
+
+**Must Not Be Confused With:**
+
+- Generic short-text translation
+- Manual Mode
+- Email Mode
+
+**Related Specifications:**
+
+- F005
+- F006
+
+---
+
+## TERM-013 — Email Mode
+
+**Canonical Term:** Email Mode
+
+**Korean Meaning:** 업무 이메일 번역을 위한 모드
+
+**Definition:**
+
+A Mode intended for professional email translation.
+
+Email Mode may consider:
+
+- Sender and recipient context
+- Business tone
+- Politeness
+- Natural phrasing
+- Preservation of intended meaning
+- Appropriate email conventions
+
+Detailed behavior belongs to F005 and F006.
+
+**Must Not Be Confused With:**
+
+- AI email writing assistant
+- General chat
+- Manual Mode
+
+**Related Specifications:**
+
+- F005
+- F006
+
+---
+
+## TERM-014 — Manual Mode
+
+**Canonical Term:** Manual Mode
+
+**Korean Meaning:** 제품 매뉴얼 및 사용 설명 콘텐츠 번역을 위한 모드
+
+**Definition:**
+
+A Mode intended for product manuals, instructions, warnings, setup procedures, and related documentation.
+
+Manual Mode may prioritize:
+
+- Original structure preservation
+- Terminology consistency
+- Instruction clarity
+- Warning accuracy
+- Product-specific terminology
+- Reuse of approved Assets and Knowledge
+
+Detailed behavior belongs to F005 and F006.
+
+**Must Not Be Confused With:**
+
+- Manual user input
+- A mode where AI is disabled
+- Generic document translation
+
+**Related Specifications:**
+
+- F005
+- F006
+
+---
+
+## TERM-015 — Translation Optimization
+
+**Canonical Term:** Translation Optimization
+
+**Korean Meaning:** 번역 목적과 지식을 반영하여 추천 품질을 최적화하는 기능
+
+**Definition:**
+
+The system behavior responsible for generating or improving AI Recommendations based on available context such as Mode, Source Content, User Profile, and relevant reusable knowledge.
+
+Translation Optimization describes the recommendation intelligence of ATA.
+
+It does not mean automatic user approval.
+
+**Must Not Be Confused With:**
+
+- Translation Workspace
+- Mode
+- Review
+- Knowledge approval
+
+**Core Rules:**
+
+- Translation Optimization may use only approved and available context.
+- It must respect the selected Mode.
+- It must not silently convert recommendations into approved Knowledge.
+- Detailed generation behavior belongs to F006.
+
+**Related Specifications:**
+
+- F001
+- F002
+- F003
+- F005
+- F006
+
+---
+
+# 8. Knowledge Terms
+
+## TERM-016 — Knowledge
+
+**Canonical Term:** Knowledge
+
+**Korean Meaning:** ATA에서 향후 번역 작업에 재사용할 수 있는 검증된 번역 지식
+
+**Definition:**
+
+Translation knowledge that has reached an approved state for future reuse according to the applicable ATA review or save flow.
+
+Knowledge may represent approved terminology, translation decisions, style guidance, patterns, or other reusable translation information, depending on the relevant specification.
+
+Knowledge is a conceptual state of trusted reusable information.
+
+**Must Not Be Confused With:**
+
+- AI Recommendation
+- User-edited Translation
+- Workspace History
+- Asset
+- Reviewed Content
+
+**Key Distinction:**
+
+```text
+AI Recommendation ≠ Knowledge
+
+User Edit ≠ Knowledge
+
+Workspace History ≠ Knowledge
+
+Reviewed Content ≠ Automatically Knowledge
+```
+
+**Core Rules:**
+
+- AI Recommendations do not automatically become Knowledge.
+- User edits do not automatically become Knowledge.
+- Workspace History is not automatically Knowledge.
+- Transition into Knowledge must follow the applicable Review or Save Flow.
+- Knowledge must be reusable in future translation work according to relevant specifications.
+
+**Related Specifications:**
+
+- F003
+- F006
+- F009
+- F011
+
+---
+
+## TERM-017 — Asset
+
+**Canonical Term:** Asset
+
+**Plural:** Assets
+
+**Official Feature Name:** ATA Assets
+
+**Korean Meaning:** ATA에서 관리하고 재사용하는 번역 자산
+
+**Definition:**
+
+A structured reusable translation resource managed by ATA.
+
+An Asset may represent a reusable piece of translation-related information according to F003.
+
+Possible Asset types may include, only where explicitly defined:
+
+- Approved terminology
+- Translation pairs
+- Style guidance
+- Product-specific expressions
+- Reusable translation patterns
+
+The exact Asset types and lifecycle are defined by F003.
+
+**Must Not Be Confused With:**
+
+- Knowledge as a conceptual trust state
+- Workspace History
+- AI Recommendation
+- Uploaded file asset
+- Generic digital file
+
+**Key Distinction:**
+
+```text
+Knowledge
+= trusted reusable translation knowledge as a concept
+
+Asset
+= a structured reusable translation resource represented and managed by ATA
+```
+
+The exact relationship between Knowledge and Assets must be finalized in F003 and related specifications.
+
+**Core Rules:**
+
+- An AI Recommendation does not automatically become an Asset.
+- A Workspace History record is not automatically an Asset.
+- Asset creation and approval must follow the relevant specification.
+- Assets may be surfaced as contextual recommendations when relevant.
+
+**Related Specifications:**
+
+- F003
+- F006
+- F009
+- F011
+
+---
+
+## TERM-018 — Assets Recommendation
+
+**Canonical Term:** Assets Recommendation
+
+**Korean Meaning:** 현재 번역 작업과 관련된 기존 번역 자산 추천
+
+**Definition:**
+
+A contextual presentation of relevant ATA Assets that may help the user make a translation decision in the current Workspace.
+
+An Assets Recommendation does not create new Knowledge by itself.
+
+It surfaces existing relevant reusable resources.
+
+**Must Not Be Confused With:**
+
+- AI Recommendation
+- New Asset creation
+- Knowledge approval
+- History Recommendation
+
+**Core Rules:**
+
+- The section is conditional.
+- It should appear only when relevant Assets exist according to the applicable matching rules.
+- It must not display an empty panel merely to fill the interface unless explicitly specified.
+- Detailed matching and interaction behavior belongs to F003.
+
+**Related Specifications:**
+
+- F001
+- F003
+- F006
+
+---
+
+# 9. History and Recovery Terms
+
+## TERM-019 — Workspace History
+
+**Canonical Term:** Workspace History
+
+**Short Form:** History, only when context is unambiguous
+
+**Korean Meaning:** 이전 번역 작업의 저장된 이력
+
+**Definition:**
+
+The stored history of previous Workspace activity that allows users to review, search, or resume prior translation work according to F004.
+
+Workspace History represents prior work records.
+
+It is not automatically approved Knowledge.
+
+**Must Not Be Confused With:**
+
+- Workspace
+- Knowledge
+- Asset
+- Browser history
+- Revision History in specification documents
+
+**Core Rules:**
+
+- Workspace History does not automatically become Knowledge.
+- History persistence and resume behavior must follow F004.
+- History must preserve only the data defined by the applicable specifications.
+
+**Related Specifications:**
+
+- F001
+- F004
+- F011
+
+---
+
+## TERM-020 — History Recommendation
+
+**Canonical Term:** History Recommendation
+
+**Korean Meaning:** 현재 번역 작업과 관련된 과거 작업 이력 추천
+
+**Definition:**
+
+A contextual presentation of relevant previous Workspace History that may help the user make a translation decision.
+
+History Recommendation surfaces prior work context.
+
+It does not mean that the previous work has been approved as Knowledge.
+
+**Must Not Be Confused With:**
+
+- Assets Recommendation
+- AI Recommendation
+- Workspace History itself
+- Knowledge
+
+**Core Rules:**
+
+- History Recommendations are conditional.
+- They should appear only when relevant prior work exists according to applicable matching rules.
+- Previous History must not be presented as approved Knowledge unless it has independently reached that state.
+
+**Related Specifications:**
+
+- F001
+- F004
+- F006
+
+---
+
+## TERM-021 — Resume
+
+**Canonical Term:** Resume
+
+**Korean Meaning:** 이전 Workspace 작업을 이어서 진행하는 동작
+
+**Definition:**
+
+The action of reopening a previously stored Workspace and continuing work from a recoverable prior state.
+
+Resume behavior may restore selected Workspace data according to F004.
+
+**Must Not Be Confused With:**
+
+- Restore from Trash
+- Undo
+- New Workspace creation
+- Opening approved Knowledge
+
+**Core Rules:**
+
+- Resume must restore only data defined as persistent.
+- Resume behavior must not silently convert historical content into Knowledge.
+- Detailed restoration behavior belongs to F004.
+
+**Related Specifications:**
+
+- F004
+- F011
+
+---
+
+## TERM-022 — Trash
+
+**Canonical Term:** Trash
+
+**Korean Meaning:** 삭제된 항목을 임시로 보관하는 영역 또는 상태
+
+**Definition:**
+
+The feature or state used to hold deleted items that remain eligible for restoration according to the applicable specification.
+
+Deletion into Trash is conceptually distinct from permanent deletion.
+
+**Must Not Be Confused With:**
+
+- Permanent deletion
+- Archive
+- Workspace History
+- Undo
+
+**Core Rules:**
+
+- Trash behavior must define which item types are supported.
+- Retention behavior must not be assumed if not specified.
+- Permanent deletion behavior must be explicitly defined.
+
+**Related Specifications:**
+
+- F010
+
+---
+
+## TERM-023 — Restore
+
+**Canonical Term:** Restore
+
+**Korean Meaning:** Trash에 있는 항목을 다시 사용 가능한 상태로 복원하는 동작
+
+**Definition:**
+
+The action of returning an eligible deleted item from Trash to its defined active or previous state.
+
+**Must Not Be Confused With:**
+
+- Resume
+- Undo
+- History recovery
+
+**Core Rules:**
+
+- Restore applies only to supported deleted items.
+- The destination state after restoration must be defined by F010.
+- Restore must not be assumed to recreate missing related data unless explicitly specified.
+
+**Related Specifications:**
+
+- F010
+
+---
+
+# 10. Workflow Terms
+
+## TERM-024 — Review
+
+**Canonical Term:** Review
+
+**Korean Meaning:** 번역 결과 또는 관련 콘텐츠를 검토하는 워크플로우 단계
+
+**Definition:**
+
+A structured stage in which translation content is examined according to the applicable review workflow before further lifecycle transitions occur.
+
+Review is part of the Workspace Flow.
+
+It is not merely an arbitrary main-screen action.
+
+**Must Not Be Confused With:**
+
+- Reading an AI Recommendation
+- Editing a translation
+- Automatic Knowledge approval
+- Standalone `Send to Review` button
+
+**Core Rules:**
+
+- Review is a workflow concept.
+- A standalone `Send to Review` button must not be added to the main Translation Workspace unless explicitly approved.
+- Entering Review does not automatically mean content becomes Knowledge.
+- Review behavior and outcomes must follow F009 and F011.
+
+**Related Specifications:**
+
+- F009
+- F011
+
+---
+
+## TERM-025 — Reviewed Content
+
+**Canonical Term:** Reviewed Content
+
+**Korean Meaning:** 정의된 Review 과정을 거친 콘텐츠
+
+**Definition:**
+
+Content that has passed through the defined Review process or reached a reviewed state according to F009.
+
+Reviewed Content is not automatically equivalent to approved Knowledge unless the applicable specification explicitly defines that transition.
+
+**Must Not Be Confused With:**
+
+- User-edited Translation
+- Final Translation
+- Knowledge
+- AI Recommendation
+
+**Core Rules:**
+
+- Review completion and Knowledge approval must not be treated as automatically identical unless explicitly specified.
+- The exact lifecycle transition belongs to F009 and F011.
+
+**Related Specifications:**
+
+- F009
+- F011
+
+---
+
+## TERM-026 — Workspace Flow
+
+**Canonical Term:** Workspace Flow
+
+**Korean Meaning:** 하나의 번역 작업이 시작부터 완료까지 진행되는 구조화된 단계 흐름
+
+**Definition:**
+
+The defined progression of a Workspace through translation work, review, completion, and other applicable lifecycle stages.
+
+Workspace Flow governs how a translation task progresses.
+
+The exact stages and transition conditions are defined by F011.
+
+**Must Not Be Confused With:**
+
+- Workspace
+- Translation Workspace
+- User Flow
+- Navigation menu
+
+**Key Distinction:**
+
+```text
+Workspace
+= the translation work unit
+
+Translation Workspace
+= the main working UI
+
+Workspace Flow
+= the structured lifecycle and progression of the work
+```
+
+**Core Rules:**
+
+- Review is part of Workspace Flow.
+- Workflow stages must not be replaced by arbitrary standalone buttons.
+- Stage transitions must follow explicit rules.
+- AI or developers must not invent additional workflow stages.
+
+**Related Specifications:**
+
+- F001
+- F009
+- F011
+
+---
+
+## TERM-027 — User Flow
+
+**Canonical Term:** User Flow
+
+**Korean Meaning:** 특정 목표를 달성하기 위한 사용자 동작의 순서
+
+**Definition:**
+
+A documented sequence of user actions and system responses for achieving a specific goal.
+
+User Flow is a specification concept.
+
+It describes interaction behavior.
+
+**Must Not Be Confused With:**
+
+- Workspace Flow
+- Navigation
+- State Model
+
+**Key Distinction:**
+
+```text
+User Flow
+= how a user performs a specific task
+
+Workspace Flow
+= how the translation work progresses through lifecycle stages
+```
+
+**Related Specifications:**
+
+- P000
+- All applicable F0XX specifications
+
+---
+
+# 11. Input Terms
+
+## TERM-028 — OCR
+
+**Canonical Term:** OCR
+
+**Full Name:** Optical Character Recognition
+
+**Korean Meaning:** 이미지에서 텍스트를 인식하여 원문 콘텐츠로 추출하는 기능
+
+**Definition:**
+
+The capability that extracts text from an image and provides the recognized result for use as Source Content.
+
+OCR is an input mechanism.
+
+It is not a translation result.
+
+**Must Not Be Confused With:**
+
+- Image translation
+- AI Recommendation
+- Image generation
+- Manual text input
+
+**Core Rules:**
+
+- OCR output becomes Source Content when inserted into the translation workflow.
+- OCR must not silently guess unreadable text where the applicable specification requires uncertainty handling.
+- OCR failure must not destroy existing Source Content.
+- Detailed OCR behavior belongs to F007.
+
+**Related Specifications:**
+
+- F001
+- F007
+
+---
+
+## TERM-029 — OCR Result
+
+**Canonical Term:** OCR Result
+
+**Korean Meaning:** OCR을 통해 이미지에서 추출된 텍스트 결과
+
+**Definition:**
+
+The text produced by the OCR process before or as it becomes Source Content within the Workspace.
+
+An OCR Result may require user review or correction according to F007.
+
+**Must Not Be Confused With:**
+
+- Translation result
+- AI Recommendation
+- Source image itself
+
+**Core Rules:**
+
+- OCR Result is not translated content.
+- OCR Result must not be represented as certain when recognition confidence is insufficient and the applicable specification requires uncertainty disclosure.
+- Once accepted into the translation workflow, it functions as Source Content.
+
+**Related Specifications:**
+
+- F007
+
+---
+
+# 12. User Context Terms
+
+## TERM-030 — User Profile
+
+**Canonical Term:** User Profile
+
+**Korean Meaning:** 번역 추천과 사용자 경험에 활용될 수 있는 사용자별 설정 및 작업 맥락
+
+**Definition:**
+
+The user-specific information defined by F002 that may influence translation recommendations, preferences, or Workspace behavior.
+
+The exact profile attributes must be explicitly defined in F002.
+
+**Must Not Be Confused With:**
+
+- User account
+- Workspace Context
+- Mode
+- Knowledge
+
+**Core Rules:**
+
+- User Profile must not include unspecified personal data.
+- AI must not infer or create profile attributes without product authorization.
+- User Profile usage must follow applicable privacy requirements.
+
+**Related Specifications:**
+
+- F002
+- F006
+
+---
+
+# 13. System State Terms
+
+## TERM-031 — Empty State
+
+**Canonical Term:** Empty State
+
+**Korean Meaning:** 표시할 데이터가 존재하지 않는 상태
+
+**Definition:**
+
+A UI state in which a component or section has no applicable data to display.
+
+Empty State behavior may include:
+
+- Showing guidance
+- Showing a placeholder
+- Remaining hidden
+
+The correct behavior must be defined by the relevant specification.
+
+**Core Rules:**
+
+- Empty panels must not be shown merely to fill UI space.
+- Conditional ATA sections may remain hidden when no relevant data exists.
+- Empty State behavior must not be left to arbitrary implementation preference.
+
+**Related Specifications:**
+
+- P000
+- All applicable visual F0XX specifications
+
+---
+
+## TERM-032 — Loading State
+
+**Canonical Term:** Loading State
+
+**Korean Meaning:** 비동기 작업이 진행 중인 상태
+
+**Definition:**
+
+A temporary system or component state while an asynchronous operation is in progress.
+
+Examples may include:
+
+- Recommendation generation
+- OCR processing
+- History loading
+- Asset matching
+
+**Core Rules:**
+
+- Loading must preserve user work where possible.
+- The entire screen must not be blocked unless explicitly required.
+- Previous data visibility during loading must be defined by the relevant feature specification.
+
+**Related Specifications:**
+
+- P000
+- F001
+- F003
+- F004
+- F006
+- F007
+
+---
+
+## TERM-033 — Error State
+
+**Canonical Term:** Error State
+
+**Korean Meaning:** 작업 실패 또는 시스템 오류로 인해 정상 결과를 제공할 수 없는 상태
+
+**Definition:**
+
+A defined state representing failure of an operation or inability to provide the expected result.
+
+An Error State must define user impact, data preservation, and recovery behavior where applicable.
+
+**Core Rules:**
+
+- Recoverable errors must preserve user-entered work where possible.
+- Raw technical errors must not be exposed directly to end users unless explicitly required.
+- Actionable failures must not be hidden silently.
+
+**Related Specifications:**
+
+- P000
+- All applicable F0XX specifications
+
+---
+
+# 14. Specification and Implementation Terms
+
+## TERM-034 — Product Specification
+
+**Canonical Term:** Product Specification
+
+**Korean Meaning:** 제품의 의도, 범위, 동작, 상태, 규칙 및 검증 기준을 정의하는 공식 설계 문서
+
+**Definition:**
+
+An authoritative document describing what an ATA feature must do and how its correctness can be verified.
+
+ATA F0XX documents are Product Specifications.
+
+**Must Not Be Confused With:**
+
+- Informal notes
+- Design inspiration
+- Implementation code
+- Test case document
+
+**Core Rules:**
+
+- Product Specifications are the source of truth for intended product behavior.
+- Current implementation does not automatically override an approved specification.
+- Unresolved behavior must be documented as an Open Question rather than guessed.
+
+**Related Specifications:**
+
+- P000
+- All F0XX specifications
+
+---
+
+## TERM-035 — Acceptance Criteria
+
+**Canonical Term:** Acceptance Criteria
+
+**Korean Meaning:** 기능이 올바르게 구현되었다고 판단하기 위한 검증 가능한 최소 조건
+
+**Definition:**
+
+Observable and testable conditions used to determine whether implementation satisfies the specification.
+
+**Must Not Be Confused With:**
+
+- General goals
+- QA test cases
+- Developer checklist
+
+**Core Rules:**
+
+- Each Acceptance Criterion must be independently verifiable.
+- Acceptance Criteria must reflect documented product requirements.
+- They must not introduce new requirements that do not exist elsewhere in the specification.
+
+**Related Specifications:**
+
+- P000
+- All F0XX specifications
+
+---
+
+## TERM-036 — Business Rule
+
+**Canonical Term:** Business Rule
+
+**Korean Meaning:** 제품 동작에서 반드시 지켜져야 하는 명시적 규칙
+
+**Definition:**
+
+A specific, testable rule governing required ATA product behavior.
+
+Example:
+
+```text
+Mode selection is mandatory before Recommendation generation.
+```
+
+**Core Rules:**
+
+- Business Rules must be specific.
+- Business Rules must be testable.
+- Unrelated behavior should not be combined into a single rule.
+
+**Related Specifications:**
+
+- P000
+- All applicable F0XX specifications
+
+---
+
+## TERM-037 — Validation Rule
+
+**Canonical Term:** Validation Rule
+
+**Korean Meaning:** 입력값이나 실행 조건의 유효성을 판단하는 규칙
+
+**Definition:**
+
+A rule that determines whether input, state, or conditions are valid for a particular operation.
+
+**Must Not Be Confused With:**
+
+- Business Rule
+- Error handling
+- Acceptance Criteria
+
+**Core Rules:**
+
+- Validation timing must be defined where relevant.
+- Invalid conditions must not trigger prohibited operations.
+- Recovery behavior should be defined when applicable.
+
+**Related Specifications:**
+
+- P000
+- All applicable F0XX specifications
+
+---
+
+## TERM-038 — Open Question
+
+**Canonical Term:** Open Question
+
+**Korean Meaning:** 아직 결정되지 않아 명시적인 판단이 필요한 제품 사항
+
+**Definition:**
+
+A product decision that remains unresolved and must not be silently converted into an assumption.
+
+**Core Rules:**
+
+- AI must not guess the answer to a material Open Question.
+- Developers must not silently select behavior that materially changes the product.
+- Open Questions should be resolved before implementation when they block required behavior.
+
+**Related Specifications:**
+
+- P000
+- All applicable F0XX specifications
+
+---
+
+# 15. Critical Distinctions
+
+The following distinctions are mandatory across ATA.
+
+## 15.1 Workspace vs Translation Workspace
+
+```text
+Workspace
+= A translation work unit and its associated state.
+
+Translation Workspace
+= The main UI environment where the user works on a Workspace.
+```
+
+These terms are not interchangeable.
+
+---
+
+## 15.2 Workspace vs Workspace History
+
+```text
+Workspace
+= Current or active translation work unit.
+
+Workspace History
+= Stored record of previous Workspace activity.
+```
+
+History is not automatically Knowledge.
+
+---
+
+## 15.3 AI Recommendation vs User-edited Translation
+
+```text
+AI Recommendation
+= AI-generated proposed translation.
+
+User-edited Translation
+= Translation content explicitly modified by the user.
+```
+
+Neither automatically becomes Knowledge.
+
+---
+
+## 15.4 Final Translation vs Knowledge
+
+```text
+Final Translation
+= Translation considered complete for the current task.
+
+Knowledge
+= Approved reusable translation knowledge for future work.
+```
+
+A completed translation does not automatically become Knowledge.
+
+---
+
+## 15.5 Knowledge vs Asset
+
+```text
+Knowledge
+= Trusted reusable translation knowledge as a conceptual state.
+
+Asset
+= A structured reusable translation resource represented and managed by ATA.
+```
+
+Their detailed relationship must follow F003 and related lifecycle specifications.
+
+---
+
+## 15.6 Asset Recommendation vs History Recommendation
+
+```text
+Assets Recommendation
+= Surfaces relevant structured reusable translation resources.
+
+History Recommendation
+= Surfaces relevant previous translation work.
+```
+
+Previous work is not automatically trusted Knowledge.
+
+---
+
+## 15.7 Review vs Knowledge Approval
+
+```text
+Review
+= A structured examination stage.
+
+Knowledge Approval
+= A lifecycle transition into approved reusable Knowledge.
+```
+
+Completing Review does not automatically equal Knowledge approval unless explicitly defined.
+
+---
+
+## 15.8 User Flow vs Workspace Flow
+
+```text
+User Flow
+= The sequence of actions and responses for accomplishing a specific task.
+
+Workspace Flow
+= The lifecycle progression of the overall translation work unit.
+```
+
+---
+
+## 15.9 OCR Result vs Translation Result
+
+```text
+OCR Result
+= Text extracted from an image.
+
+Translation Result
+= Translated content produced during translation work.
+```
+
+OCR is an input mechanism, not translation.
+
+---
+
+# 16. Prohibited Terminology Assumptions
+
+The following assumptions are prohibited unless explicitly approved by the applicable specification.
+
+```text
+AI Recommendation = Final Translation
+AI Recommendation = Knowledge
+User Edit = Knowledge
+Final Translation = Knowledge
+Workspace History = Knowledge
+Workspace History = Asset
+Review Completion = Knowledge Approval
+OCR Result = Translation Result
+Workspace = Translation Workspace
+User Flow = Workspace Flow
+```
+
+AI systems, developers, and reviewers must preserve these distinctions.
+
+---
+
+# 17. Canonical Term Index
+
+| Term ID | Canonical Term | Korean Meaning | Primary Specification |
+|---|---|---|---|
+| TERM-001 | ATA | ATA 프로젝트 및 제품 | P000 |
+| TERM-002 | Knowledge-driven Translation Workspace | 지식 기반 번역 워크스페이스 | P000 |
+| TERM-003 | Workspace | 번역 작업 단위 | F001 / F004 / F011 |
+| TERM-004 | Translation Workspace | 메인 번역 작업 화면 | F001 |
+| TERM-005 | Workspace Context | 현재 번역 작업 맥락 | F001 |
+| TERM-006 | Source Content | 번역 대상 원문 | F001 |
+| TERM-007 | AI Recommendation | AI 추천 결과 | F006 |
+| TERM-008 | User-edited Translation | 사용자 수정 번역 | F001 / F006 |
+| TERM-009 | Final Translation | 현재 작업의 최종 번역 | F011 |
+| TERM-010 | Sentence Card | 문장 단위 번역 검토 카드 | F001 |
+| TERM-011 | Mode | 번역 목적 및 작업 유형 | F005 |
+| TERM-012 | App Mode | 앱 UI 번역 모드 | F005 |
+| TERM-013 | Email Mode | 업무 이메일 번역 모드 | F005 |
+| TERM-014 | Manual Mode | 매뉴얼 번역 모드 | F005 |
+| TERM-015 | Translation Optimization | 번역 추천 최적화 | F006 |
+| TERM-016 | Knowledge | 검증된 재사용 가능 번역 지식 | F003 / F009 |
+| TERM-017 | Asset | 구조화된 재사용 가능 번역 자산 | F003 |
+| TERM-018 | Assets Recommendation | 관련 번역 자산 추천 | F003 |
+| TERM-019 | Workspace History | 이전 번역 작업 이력 | F004 |
+| TERM-020 | History Recommendation | 관련 과거 작업 추천 | F004 |
+| TERM-021 | Resume | 이전 작업 이어서 진행 | F004 |
+| TERM-022 | Trash | 삭제 항목 임시 보관 영역 또는 상태 | F010 |
+| TERM-023 | Restore | 삭제 항목 복원 | F010 |
+| TERM-024 | Review | 구조화된 검토 단계 | F009 |
+| TERM-025 | Reviewed Content | 검토 과정을 거친 콘텐츠 | F009 |
+| TERM-026 | Workspace Flow | 번역 작업의 구조화된 진행 흐름 | F011 |
+| TERM-027 | User Flow | 특정 목표를 위한 사용자 동작 흐름 | P000 |
+| TERM-028 | OCR | 이미지 텍스트 인식 기능 | F007 |
+| TERM-029 | OCR Result | 이미지에서 추출된 텍스트 | F007 |
+| TERM-030 | User Profile | 사용자별 설정 및 작업 맥락 | F002 |
+| TERM-031 | Empty State | 데이터가 없는 UI 상태 | P000 |
+| TERM-032 | Loading State | 비동기 작업 진행 상태 | P000 |
+| TERM-033 | Error State | 작업 실패 또는 오류 상태 | P000 |
+| TERM-034 | Product Specification | 공식 제품 설계 문서 | P000 |
+| TERM-035 | Acceptance Criteria | 구현 검증을 위한 최소 조건 | P000 |
+| TERM-036 | Business Rule | 필수 제품 동작 규칙 | P000 |
+| TERM-037 | Validation Rule | 입력 및 실행 조건 검증 규칙 | P000 |
+| TERM-038 | Open Question | 미결정 제품 사항 | P000 |
+
+---
+
+# 18. Usage Rules for Future Specifications
+
+All future ATA specifications must follow these terminology rules.
+
+1. Use canonical terms defined in this glossary.
+2. Do not introduce synonyms without a documented reason.
+3. Do not redefine an existing term implicitly.
+4. If a feature requires a narrower meaning, state the feature-specific definition explicitly.
+5. If a genuinely new ATA concept is introduced, add it to this glossary when it has project-wide significance.
+6. Feature-specific UI labels do not automatically require glossary entries.
+7. A new glossary term must not be created merely because a temporary implementation variable or component name exists.
+8. When two concepts have different lifecycle states, do not collapse them into one term for convenience.
+9. English canonical terminology should remain consistent across specifications and implementation references.
+10. When terminology is uncertain, record the issue explicitly instead of choosing inconsistent terms across documents.
+
+---
+
+# 19. Glossary Review Checklist
+
+Before approving this glossary or adding a new term, verify:
+
+- [ ] Does the term represent a real ATA concept?
+- [ ] Is the canonical name clear?
+- [ ] Is the definition specific enough to prevent multiple interpretations?
+- [ ] Is it distinct from similar terms?
+- [ ] Are prohibited equivalences identified where necessary?
+- [ ] Does the term avoid defining detailed behavior that belongs in an F0XX specification?
+- [ ] Are related specifications correctly referenced?
+- [ ] Does the term preserve ATA's identity as a Knowledge-driven Translation Workspace?
+- [ ] Could a capable AI use the term consistently without inventing major product behavior?
+- [ ] Does the term conflict with P000 or another approved definition?
+
+---
+
+# 20. Open Questions
+
+The following terminology decisions require confirmation through future feature specifications.
+
+## OQ-001 — Exact Relationship Between Knowledge and Asset
+
+**Status:** Open
+
+**Question:**
+
+Is every approved Knowledge item represented as an Asset, or can Knowledge exist independently from ATA Assets?
+
+**Current Definition:**
+
+```text
+Knowledge
+= trusted reusable translation knowledge as a conceptual state
+
+Asset
+= a structured reusable translation resource represented and managed by ATA
+```
+
+**Impact:**
+
+This decision affects:
+
+- F003 ATA Assets
+- F009 Review Workflow
+- F011 Workspace Flow
+- Knowledge approval lifecycle
+- Asset creation behavior
+- Search and recommendation behavior
+
+**Rule Until Decided:**
+
+Do not treat Knowledge and Asset as identical.
+
+---
+
+## OQ-002 — Final Translation Completion Condition
+
+**Status:** Open
+
+**Question:**
+
+At exactly what point does translation content become a Final Translation?
+
+Possible conditions must be determined by F011.
+
+**Impact:**
+
+This decision affects:
+
+- Workspace completion
+- Review entry
+- History state
+- Knowledge lifecycle
+
+**Rule Until Decided:**
+
+Do not automatically treat an AI Recommendation or User-edited Translation as a Final Translation.
+
+---
+
+## OQ-003 — Review Completion and Knowledge Approval
+
+**Status:** Open
+
+**Question:**
+
+Does successful Review completion automatically approve content as Knowledge, or is an additional explicit approval or save transition required?
+
+**Impact:**
+
+This decision affects:
+
+- F003
+- F009
+- F011
+- Knowledge lifecycle
+- User control
+- Workspace completion
+
+**Rule Until Decided:**
+
+Do not assume that Review completion automatically creates approved Knowledge.
+
+---
+
+## OQ-004 — Sentence Card Lifecycle
+
+**Status:** Open
+
+**Question:**
+
+Is a Sentence Card only a UI representation within F001, or does each Sentence Card have an independent state and lifecycle?
+
+**Impact:**
+
+This decision affects:
+
+- F001
+- F006
+- F011
+- State management
+- Review behavior
+- Persistence
+
+**Rule Until Decided:**
+
+Do not create an independent Sentence Card workflow without explicit specification support.
+
+---
+
+## OQ-005 — Workspace Creation Timing
+
+**Status:** Open
+
+**Question:**
+
+At exactly what point is a new Workspace considered created?
+
+Possible triggers may include:
+
+- Opening the Translation Workspace
+- Selecting a Mode
+- Entering Source Content
+- Beginning Recommendation generation
+
+The exact behavior must be defined by F001, F004, and F011.
+
+**Rule Until Decided:**
+
+Do not assume a persistence lifecycle based solely on screen entry.
+
+---
+
+# 21. Revision History
+
+| Version | Date | Description |
+|---|---|---|
+| V1.0 | 2026-07-15 | Initial ATA terminology standard established |
+
+---
+
+# End of P001
